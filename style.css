@@ -44,11 +44,13 @@ html, body {
     padding: 1rem 0;
     text-decoration: none;
     position: relative;
+    transition: color var(--navbar-transition-time) ease-out;
 }
 
 #navbar a:hover {
     color: var(--navbar-theme-two);
     font-weight: 700;
+    transition: none;
 }
 
 @property --background-ratio {
@@ -67,7 +69,7 @@ html, body {
     }
 }
 
-#navbar a::before {
+#navbar a:before {
     content: '';
     position: absolute;
     top: 0;
@@ -76,16 +78,30 @@ html, body {
     height: 100%;
     z-index: -1;
     transform: skewX(-20deg) scaleX(1.2);
-    box-sizing: border-box;
-    visibility: hidden;
     transition: box-shadow var(--navbar-transition-time);
 }
 
 #navbar a:hover:before {
-    visibility: visible;
     animation: navbutton-background var(--navbar-transition-time) forwards;
     background: conic-gradient(var(--navbar-theme-one) var(--background-ratio), transparent var(--background-ratio) 360deg);
     box-shadow: 0 0 1rem var(--navbar-theme-one), 0 0 2rem var(--navbar-theme-one), 0 0 3rem var(--navbar-theme-one);
+}
+
+#navbar a:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: skewX(-20deg) scaleX(1.2);
+    transition: background-color var(--navbar-transition-time);
+}
+
+#navbar a:hover:after {
+    background-color: var(--navbar-theme-one);
+    transition: background-color 0s var(--navbar-transition-time);
 }
 
 /* ABOUT SECTION */
