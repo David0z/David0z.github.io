@@ -1,3 +1,97 @@
-h2 {
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
+
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+ --navbar-theme-one: rgb(0, 132, 255);   
+ --navbar-theme-two: #333;
+ --navbar-transition-time: 0.6s;
+}
+
+/* NAVIGATION BAR */
+
+#navbar {
+    position: fixed;
+    width: 100%;
+    background-color: var(--navbar-theme-two);
+}
+
+#navbar ul {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 2rem 0 0;
+}
+
+#navbar li {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin-left: 2rem;
+    width: 4rem;
+}
+
+#navbar a {
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 1rem 0;
+    text-decoration: none;
+    position: relative;
+}
+
+#navbar a:hover {
+    color: var(--navbar-theme-two);
+    font-weight: 700;
+}
+
+@property --background-ratio {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+  }
+
+@keyframes navbutton-background {
+    0% {
+        --background-ratio: 0deg;
+    }
+
+    100% {
+        --background-ratio: 360deg;
+    }
+}
+
+#navbar a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transform: skewX(-20deg) scaleX(1.2);
+    box-sizing: border-box;
+    visibility: hidden;
+    transition: box-shadow var(--navbar-transition-time);
+}
+
+#navbar a:hover:before {
+    visibility: visible;
+    animation: navbutton-background var(--navbar-transition-time) forwards;
+    background: conic-gradient(var(--navbar-theme-one) var(--background-ratio), transparent var(--background-ratio) 360deg);
+    box-shadow: 0 0 1rem var(--navbar-theme-one), 0 0 2rem var(--navbar-theme-one), 0 0 3rem var(--navbar-theme-one);
+}
+
+/* ABOUT SECTION */
+
+#about {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(202, 202, 202);
 }
