@@ -36,7 +36,7 @@ for (let i = 0; i < listLength; i++) {
     if(i == 0) {
         frame.classList.add('displaying');
     }
-    if(i == 1) {
+    if(i >= 1) {
         frame.classList.add('frame-right');
     }
     projectsList.push(frame);
@@ -68,7 +68,6 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed].classList.toggle('displaying');
             projectsList[currentyDisplayed].classList.toggle('frame-right');
             projectsList[currentyDisplayed - 1].classList.toggle('frame-left');
-            projectsList[currentyDisplayed + 1].classList.toggle('frame-right');
             projectsList[currentyDisplayed - 1].classList.toggle('displaying');
             projectsList[currentyDisplayed - 2].classList.toggle('transparent');
             projectsList[currentyDisplayed + 1].classList.toggle('transparent');
@@ -79,7 +78,6 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed].classList.toggle('displaying');
             projectsList[currentyDisplayed].classList.toggle('frame-left');
             projectsList[currentyDisplayed + 1].classList.toggle('frame-right');
-            projectsList[currentyDisplayed + 2].classList.toggle('frame-right');
             projectsList[currentyDisplayed + 1].classList.toggle('displaying');
             currentyDisplayed++;
             if(currentyDisplayed > 1) {
