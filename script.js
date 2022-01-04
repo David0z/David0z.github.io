@@ -28,8 +28,20 @@ projectsList.push(firstFrame);
 
 for (let i = 0; i < listLength; i++) {
     const frame = document.createElement('div');
-    frame.innerText = `Frame number ${i + 1}`;
+    const card = document.createElement('div');
+    const frontSide = document.createElement('div');
+    const backSide = document.createElement('div');
+    // Optional
+    frontSide.innerText = `Frame number ${i + 1}`;
+    backSide.innerText = `Back text of frame number ${i + 1}`;
+    // Optional
+    frame.append(card);
+    card.append(frontSide);
+    card.append(backSide);
     frame.classList.add('frame');
+    card.classList.add('frame-card');
+    frontSide.classList.add('frame-front');
+    backSide.classList.add('frame-back');
     if(i > 1) {
         frame.classList.add('transparent');
     }
