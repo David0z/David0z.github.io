@@ -9,18 +9,48 @@ html, body {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 :root {
- --navbar-theme-one: rgb(0, 132, 255);   
- --navbar-theme-two: #333;
- --navbar-transition-time: 0.6s;
+ --theme-one: rgb(0, 132, 255);
+ --theme-two: #2f2f2f;
+ --theme-three: rgb(31, 31, 31);
+ --navbar-transition-time: 0.5s;
+ /* ------------------------ */
+ /* ABOUT SECTION ANIMATIONS */
+ /* ------------------------ */
+ /* squares pop-up animation */
+ --anim1-length: 1s;
+ --anim1-delay: 1s;
+ /* squares length animation */
+ --anim2-length: 1s;
+ --anim2-delay: calc(var(--anim1-length) + var(--anim1-delay));
+ /* header1 animation */
+ --anim3-length: 1s;
+ --anim3-delay: calc(var(--anim2-length) + var(--anim2-delay));
+ /* header2 animation */
+ --anim4-length: 1s;
+ --anim4-delay: calc(var(--anim3-length) / 2 + var(--anim3-delay));
+ /* paragraph animation */
+ --anim5-length: 1s;
+ --anim5-delay: calc(var(--anim4-length) / 2 + var(--anim4-delay));
+}
+
+body {
+    background-color: var(--theme-two);
 }
 
 /* NAVIGATION BAR */
 
 #navbar {
     position: fixed;
+    z-index: 100;
     width: 100%;
-    background-color: var(--navbar-theme-two);
+    /* background: linear-gradient(to bottom, rgba(51, 51, 51, 0.3), transparent); */
+    backdrop-filter: blur(0.5rem);
+    transition: margin 0.6s;
 }
 
 #navbar ul {
@@ -42,13 +72,14 @@ html, body {
     text-align: center;
     width: 100%;
     padding: 1rem 0;
+    line-height: 1.5rem;
     text-decoration: none;
     position: relative;
     transition: color var(--navbar-transition-time) ease-out;
 }
 
 #navbar a:hover {
-    color: var(--navbar-theme-two);
+    color: var(--theme-two);
     font-weight: 700;
     transition: none;
 }
@@ -83,8 +114,8 @@ html, body {
 
 #navbar a:hover:before {
     animation: navbutton-background var(--navbar-transition-time) forwards;
-    background: conic-gradient(var(--navbar-theme-one) var(--background-ratio), transparent var(--background-ratio) 360deg);
-    box-shadow: 0 0 1rem var(--navbar-theme-one), 0 0 2rem var(--navbar-theme-one), 0 0 3rem var(--navbar-theme-one);
+    background: conic-gradient(var(--theme-one) var(--background-ratio), transparent var(--background-ratio) 360deg);
+    box-shadow: 0 0 1rem var(--theme-one), 0 0 2rem var(--theme-one), 0 0 3rem var(--theme-one);
 }
 
 #navbar a:after {
@@ -100,7 +131,7 @@ html, body {
 }
 
 #navbar a:hover:after {
-    background-color: var(--navbar-theme-one);
+    background-color: var(--theme-one);
     transition: background-color 0s var(--navbar-transition-time);
 }
 
@@ -108,6 +139,278 @@ html, body {
 
 #about {
     width: 100%;
-    height: 100vh;
-    background-color: rgb(202, 202, 202);
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: calc((2rem + 1.5rem) + 3.5rem) 0;
+    display: flex;
+    justify-content: center;
+    background: 
+    linear-gradient(to top, var(--theme-two), transparent 20%), 
+    linear-gradient(-5deg, var(--theme-two), transparent 30%), 
+    linear-gradient(-10deg, var(--theme-two), black);
+}
+
+#about > div {
+    width: 83%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+#about > div > div {
+    width: 50%;
+    box-sizing: border-box;
+}
+
+#about > div > div:nth-child(1) {
+    padding: 3rem 0 0 3rem;
+    position: relative;
+}
+
+@keyframes squares {
+    33% {
+        opacity: 1;
+    }
+    49.5% {
+        opacity: 0;
+    }
+    66% {
+        opacity: 1;
+    }
+    82.5% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#square1, #square2 {
+    --size: 2rem;
+    --length: 10rem;
+    width: var(--size);
+    height: var(--size);
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+@keyframes square1 {
+    100% {
+        width: var(--length);
+    }
+}
+
+#square1 {
+    animation: squares var(--anim1-length) var(--anim1-delay) forwards, square1 var(--anim2-length) var(--anim2-delay) forwards;
+}
+
+@keyframes square2 {
+    100% {
+        height: var(--length);
+    }
+}
+
+#square2 {
+    animation: squares var(--anim1-length) var(--anim1-delay) forwards, square2 var(--anim2-length) var(--anim2-delay) forwards;
+}
+
+@keyframes opacity {
+    100% {
+        opacity: 1;
+    }
+}
+
+#about > div > div:nth-child(1) h1, 
+#about > div > div:nth-child(1) h2, 
+#about > div > div:nth-child(1) p {
+    opacity: 0;
+}
+
+#about > div > div:nth-child(1) h1 {
+    color: white;
+    font-size: 4rem;
+    margin: 0;
+    line-height: 4rem;
+    animation: opacity var(--anim3-length) var(--anim3-delay) forwards;
+}
+
+#about > div > div:nth-child(1) h2 {
+    color: var(--theme-one);
+    font-size: 2.4rem;
+    margin: 0;
+    animation: opacity var(--anim4-length) var(--anim4-delay) forwards;
+}
+
+#about > div > div:nth-child(1) p {
+    color: white;
+    font-size: 1.4rem;
+    width: 24rem;
+    margin-right: 5rem;
+    animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
+}
+
+#about > div > div:nth-child(2) {
+    /* border: 1px solid white; */
+}
+
+/* PROJECTS SECTION */
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: 
+    linear-gradient(to bottom, var(--theme-two), transparent 20%), 
+    linear-gradient(5deg, black 5%, var(--theme-two));
+    min-height: 146vh;
+}
+
+#projects {
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    overflow-x: hidden;
+}
+
+#projects-display {
+    background: linear-gradient(to right, rgba(128, 0, 128, 0.336) 0% 50%, rgba(0, 0, 255, 0.24) 50% 100%);
+    width: 100%;
+    /* Got no idea why that is, but gotta set that left margin to negative 1px so that the frames are centered properly */
+    margin-left: -1px;
+    min-height: 35rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.frame {
+    --width: 32rem;
+    --margin: 1rem;
+    width: var(--width);
+    height: 20rem;
+    background: linear-gradient(to right, purple 0% 50%, blue 50% 100%);
+    /* border: 1px solid rgba(255, 0, 0, 0.137); */
+    /* box-sizing: border-box; */
+    flex-shrink: 0;
+    margin: 0 var(--margin);
+    font-size: 2rem;
+    transition: opacity 0.3s, border 0.3s, transform 0.3s;
+    transform-style: preserve-3d;
+}
+
+.frame-right {
+    transform: rotateY(-50deg) scale(1.25);
+}
+
+.frame-left {
+    transform: rotateY(50deg) scale(1.25);
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.invisible:first-child {
+    transition: margin 0.3s;
+}
+
+.transparent {
+    opacity: 0;
+}
+
+.displaying {
+    /* border: 1rem solid orange; */
+}
+
+#projects-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 3rem 0 5rem 0;
+    min-width: 50%;
+}
+
+#projects-title {
+    position: relative;
+    z-index: 1;
+    color: white;
+    font-size: 3rem;
+    margin: 0;
+}
+
+#projects-title::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scaleY(0.5);
+    background: var(--theme-one);
+    border-radius: 50%;
+    filter: blur(2rem);
+    z-index: -1;
+}
+
+.projects-menu-button {
+    --btn-size: 3rem;
+    --active-scale: 0.9;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    position: relative;
+}
+
+.projects-menu-button:hover {
+    cursor: pointer;
+}
+
+.projects-menu-button:before, .projects-menu-button:after {
+    --shape-width: 0.7rem;
+    border-radius: calc(var(--shape-width) / 2);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+}
+
+.projects-menu-button:before {
+    height: var(--shape-width);
+    width: 100%;
+}
+
+.projects-menu-button:after {
+    width: var(--shape-width);
+    height: 100%;
+}
+
+#projects-menu-left {
+    transform: rotate(-45deg);
+}
+
+#projects-menu-left:active {
+    transform: rotate(-45deg) scale(var(--active-scale));
+}
+
+#projects-menu-right {
+    transform: rotate(135deg);
+}
+
+#projects-menu-right:active {
+    transform: rotate(135deg) scale(var(--active-scale));
+}
+
+/* CONTACT SECTION */
+
+#contact {
+    background: black;
+    min-height: 100vh;
 }
