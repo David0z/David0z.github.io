@@ -23,26 +23,38 @@ const projectsArray = [
     {
         projectName: 'Choropleth Map',
         projectUrl: 'https://codepen.io/dawid0zz/full/oNeJqEZ',
-        projectImage: '/resources/usmap.png'
+        projectImage: '/resources/usmap.png',
+        projectTools: ['HTML, CSS, Javascript', 'React.js', 'D3.js']
     },
     {
         projectName: 'Calculator',
         projectUrl: 'https://codepen.io/dawid0zz/full/bGRJzyO',
-        projectImage: '/resources/calculator.png'
+        projectImage: '/resources/calculator.png',
+        projectTools: ['HTML, CSS, Javascript', 'Math.js']
     },
     {
         projectName: 'Drum Machine',
         projectUrl: 'https://codepen.io/dawid0zz/full/gORXKoV',
-        projectImage: '/resources/drum.png'
+        projectImage: '/resources/drum.png',
+        projectTools: ['HTML, CSS, Javascript']
     },
     {
         projectName: 'Product Landing Page',
         projectUrl: 'https://codepen.io/dawid0zz/full/ZEKbPza',
-        projectImage: '/resources/cola.png'
+        projectImage: '/resources/cola.png',
+        projectTools: ['HTML, CSS']
     }
 ];
 
 const listLength = projectsArray.length;
+
+function returnTools(index) {
+    let htmlstring='';
+    for (let j=0; j < projectsArray[index].projectTools.length; j++) {
+        htmlstring+= `&bull; ${projectsArray[index].projectTools[j]}<br>`;
+    }
+    return htmlstring;
+}
 
 const firstFrame = document.createElement('div');
 firstFrame.innerText = 'First frame';
@@ -54,9 +66,11 @@ for (let i = 0; i < listLength; i++) {
     const card = document.createElement('div');
     const frontSide = document.createElement('div');
     const backSide = document.createElement('div');
-    // Fill in
     frontSide.style.backgroundImage = `url(${projectsArray[i].projectImage})`;
-    backSide.innerText = `Back text of frame number ${i + 1}`;
+    // Fill in
+    backSide.innerHTML = 
+    `<div class="frame-back-left"><h5>Tools used:</h5><p>${returnTools(i)}</p></div>
+    <div class="frame-back-right"><a href="${projectsArray[i].projectUrl}" target="_blank">Click here to preview</a></div>`;
     // Fill in
     frame.append(card);
     card.append(frontSide);
@@ -88,7 +102,7 @@ for (let i = 0; i < projectsList.length; i++) {
 
 const projectsTitle = document.getElementById('projects-title');
 projectsTitle.innerText = projectsArray[0].projectName;
-const projectsTitleTransitionTime = parseFloat(getComputedStyle(document.querySelector('.displaying')).getPropertyValue('--displaying-transition-time').slice(0, this.length - 1)) * 1000;
+const projectsTitleTransitionTime = parseFloat(getComputedStyle(document.querySelector(':root')).getPropertyValue('--displaying-transition-time').slice(0, this.length - 1)) * 1000;
 
 let currentyDisplayed = 1;
 const frameMargin = parseFloat(getComputedStyle(document.querySelector('.frame')).getPropertyValue('--margin').slice(0, this.length - 3));
