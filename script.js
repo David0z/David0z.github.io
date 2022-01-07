@@ -18,8 +18,36 @@ document.addEventListener('scroll', (e) => {
 
 const projects = document.getElementById('projects-display');
 const projectsList = [];
+
+const projectsArray = [
+    {
+        projectName: 'Choropleth Map',
+        projectUrl: 'https://codepen.io/dawid0zz/full/oNeJqEZ',
+        projectImage: '/resources/usmap.png'
+    },
+    {
+        projectName: 'Calculator',
+        projectUrl: 'https://codepen.io/dawid0zz/full/bGRJzyO',
+        projectImage: '/resources/calculator.png'
+    },
+    {
+        projectName: 'Drum Machine',
+        projectUrl: 'https://codepen.io/dawid0zz/full/gORXKoV',
+        projectImage: '/resources/drum.png'
+    },
+    {
+        projectName: 'Product Landing Page',
+        projectUrl: 'https://codepen.io/dawid0zz/full/ZEKbPza',
+        projectImage: '/resources/cola.png'
+    }
+];
+
+const projectsTitle = document.getElementById('projects-title');
+
+projectsTitle.innerText = projectsArray[0].projectName;
+
 //test prop, modify later!!!!!!!!!
-const listLength = 11;
+const listLength = projectsArray.length;
 
 const firstFrame = document.createElement('div');
 firstFrame.innerText = 'First frame';
@@ -31,10 +59,10 @@ for (let i = 0; i < listLength; i++) {
     const card = document.createElement('div');
     const frontSide = document.createElement('div');
     const backSide = document.createElement('div');
-    // Optional
-    frontSide.innerText = `Frame number ${i + 1}`;
+    // Fill in
+    frontSide.style.backgroundImage = `url(${projectsArray[i].projectImage})`;
     backSide.innerText = `Back text of frame number ${i + 1}`;
-    // Optional
+    // Fill in
     frame.append(card);
     card.append(frontSide);
     card.append(backSide);
@@ -83,6 +111,7 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed - 1].classList.toggle('displaying');
             projectsList[currentyDisplayed - 2].classList.toggle('transparent');
             projectsList[currentyDisplayed + 1].classList.toggle('transparent');
+            projectsTitle.innerText = projectsArray[currentyDisplayed - 2].projectName;
             currentyDisplayed--;
         } else if (e.target.id === 'projects-menu-right' && currentyDisplayed < projectsList.length - 2) {
             currentMargin-= (frameWidth + 2 * frameMargin)*2;
@@ -91,6 +120,7 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed].classList.toggle('frame-left');
             projectsList[currentyDisplayed + 1].classList.toggle('frame-right');
             projectsList[currentyDisplayed + 1].classList.toggle('displaying');
+            projectsTitle.innerText = projectsArray[currentyDisplayed].projectName;
             currentyDisplayed++;
             if(currentyDisplayed > 1) {
                 projectsList[currentyDisplayed - 2].classList.toggle('transparent');
