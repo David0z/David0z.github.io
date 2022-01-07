@@ -42,11 +42,6 @@ const projectsArray = [
     }
 ];
 
-const projectsTitle = document.getElementById('projects-title');
-
-projectsTitle.innerText = projectsArray[0].projectName;
-
-//test prop, modify later!!!!!!!!!
 const listLength = projectsArray.length;
 
 const firstFrame = document.createElement('div');
@@ -91,6 +86,10 @@ for (let i = 0; i < projectsList.length; i++) {
     projects.append(projectsList[i]);
 }
 
+const projectsTitle = document.getElementById('projects-title');
+projectsTitle.innerText = projectsArray[0].projectName;
+const projectsTitleTransitionTime = parseFloat(getComputedStyle(document.querySelector('.displaying')).getPropertyValue('--displaying-transition-time').slice(0, this.length - 1)) * 1000;
+
 let currentyDisplayed = 1;
 const frameMargin = parseFloat(getComputedStyle(document.querySelector('.frame')).getPropertyValue('--margin').slice(0, this.length - 3));
 const frameWidth = parseFloat(getComputedStyle(document.querySelector('.frame')).getPropertyValue('--width').slice(0, this.length - 3));
@@ -111,7 +110,17 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed - 1].classList.toggle('displaying');
             projectsList[currentyDisplayed - 2].classList.toggle('transparent');
             projectsList[currentyDisplayed + 1].classList.toggle('transparent');
-            projectsTitle.innerText = projectsArray[currentyDisplayed - 2].projectName;
+            projectsTitle.style.opacity = 0;
+            document.querySelectorAll('.projects-menu-button').forEach(button => {
+                button.disabled = true;
+            });
+            setTimeout(() => {
+                projectsTitle.style.opacity = 1;
+                projectsTitle.innerText = projectsArray[currentyDisplayed - 1].projectName;
+                document.querySelectorAll('.projects-menu-button').forEach(button => {
+                    button.disabled = false;
+                });
+            }, projectsTitleTransitionTime / 2);
             currentyDisplayed--;
         } else if (e.target.id === 'projects-menu-right' && currentyDisplayed < projectsList.length - 2) {
             currentMargin-= (frameWidth + 2 * frameMargin)*2;
@@ -120,8 +129,18 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
             projectsList[currentyDisplayed].classList.toggle('frame-left');
             projectsList[currentyDisplayed + 1].classList.toggle('frame-right');
             projectsList[currentyDisplayed + 1].classList.toggle('displaying');
-            projectsTitle.innerText = projectsArray[currentyDisplayed].projectName;
             currentyDisplayed++;
+            projectsTitle.style.opacity = 0;
+            document.querySelectorAll('.projects-menu-button').forEach(button => {
+                button.disabled = true;
+            });
+            setTimeout(() => {
+                projectsTitle.style.opacity = 1;
+                projectsTitle.innerText = projectsArray[currentyDisplayed - 1].projectName;
+                document.querySelectorAll('.projects-menu-button').forEach(button => {
+                    button.disabled = false;
+                });
+            }, projectsTitleTransitionTime / 2);
             if(currentyDisplayed > 1) {
                 projectsList[currentyDisplayed - 2].classList.toggle('transparent');
                 projectsList[currentyDisplayed + 1].classList.toggle('transparent');

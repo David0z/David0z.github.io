@@ -309,8 +309,8 @@ body {
 }
 
 .displaying {
-    /* border: 1rem solid orange; */
-    transition: transform 0.5s, border 0.3s, opacity 0.5s;
+    --displaying-transition-time: 0.5s;
+    transition: transform var(--displaying-transition-time), border 0.3s, opacity 0.5s;
     z-index: 2;
 }
 
@@ -403,6 +403,7 @@ body {
     color: white;
     font-size: 3rem;
     margin: 0;
+    transition: opacity 0.25s;
 }
 
 #projects-title::before {
@@ -425,6 +426,8 @@ body {
     width: var(--btn-size);
     height: var(--btn-size);
     position: relative;
+    background: none;
+    border: none;
 }
 
 .projects-menu-button:hover {
