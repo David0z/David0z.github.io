@@ -14,6 +14,36 @@ document.addEventListener('scroll', (e) => {
     lastScrollValue = currentScrollValue;
 });
 
+// ABOUT SECTION WORD WALL
+
+const wordWall = document.getElementById('word-wall');
+
+const worldWallHeight = parseFloat(getComputedStyle(wordWall).getPropertyValue('--word-wall-height').slice(0, this.length - 3));
+const numberOfRows = 10;
+const wordFontSize = worldWallHeight / numberOfRows;
+const minAnimationTime = 5;
+const maxAnimationTime = 10;
+
+const numberOfWords = 50;
+
+const wordsArr = ['<body>', '</body>', '<nav>', '</nav>', '<section>', '</section>', '<div>', '</div>', '<h1>Hello World</h1>', '<p>Welcome to my page</p>', '<ul>', '</ul>', '<br>', '<li>', '</li>', '<a>', '</a>', '<hr>', '<footer>', '</footer>', '<button>Contact me</button>', '<head>', '</head>', '<script>', '</script>', '<img>'];
+
+function createWordElement() {
+    let newWordElement = document.createElement('p');
+    newWordElement.innerText = wordsArr[Math.floor(Math.random() * wordsArr.length)];
+    let newWordElementRow = Math.floor(Math.random() * numberOfRows);
+    newWordElement.style.fontSize = `${wordFontSize}rem`;
+    newWordElement.style.lineHeight = `${wordFontSize}rem`;
+    newWordElement.style.top = `${newWordElementRow * wordFontSize}rem`;
+    newWordElement.style.left = '-100%';
+    newWordElement.style.animation = `word-wall ${minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000)}ms linear infinite`;
+    wordWall.append(newWordElement);
+}
+
+for (let z=0; z < numberOfWords; z++) {
+    setTimeout(() => {createWordElement();}, Math.random() * maxAnimationTime * 1000);
+}
+
 // PROJECTS
 
 const projects = document.getElementById('projects-display');
