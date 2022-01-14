@@ -23,6 +23,8 @@ const numberOfRows = 10;
 const wordFontSize = worldWallHeight / numberOfRows;
 const minAnimationTime = 5;
 const maxAnimationTime = 10;
+const minOpacity = 0.1;
+const maxOpacity = 0.5;
 
 const numberOfWords = 50;
 
@@ -36,12 +38,13 @@ function createWordElement() {
     newWordElement.style.lineHeight = `${wordFontSize}rem`;
     newWordElement.style.top = `${newWordElementRow * wordFontSize}rem`;
     newWordElement.style.left = '-100%';
-    newWordElement.style.animation = `word-wall ${minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000)}ms linear infinite`;
+    newWordElement.style.opacity = minOpacity + Math.random() * (maxOpacity - minOpacity);
+    newWordElement.style.animation = `word-wall ${minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000)}ms  ${Math.random() * maxAnimationTime * 1000}ms linear infinite`;
     wordWall.append(newWordElement);
 }
 
 for (let z=0; z < numberOfWords; z++) {
-    setTimeout(() => {createWordElement();}, Math.random() * maxAnimationTime * 1000);
+    createWordElement();
 }
 
 // PROJECTS
@@ -194,3 +197,56 @@ document.querySelectorAll(".projects-menu-button").forEach(element => {
         }
     })
 })
+
+// INTERSECTION OBSERVERS
+
+// section header observer
+const sectionHeaderParent = document.querySelectorAll(".section-title");
+
+const sectionHeaderObserver = new IntersectionObserver (
+    entries => {
+        entries.forEach(entry => {
+            entry.target.querySelector('.section-header').classList.toggle('show', entry.isIntersecting);
+        });
+    },
+    {
+        threshold: 1
+    }
+);
+
+sectionHeaderParent.forEach(header => {
+    sectionHeaderObserver.observe(header);
+});
+
+// contact menu observer
+const contactMenu = document.querySelector("#contact-menu");
+
+const contactButtonObserver = new IntersectionObserver (
+    entries => {
+        entries.forEach(entry => {
+            entry.target.querySelectorAll('a').forEach(button => {
+                button.classList.toggle('show', entry.isIntersecting);
+            });
+        });
+    },
+    {
+        threshold: 0.9
+    }
+);
+
+contactButtonObserver.observe(contactMenu);
+
+const projectsDiv = document.getElementById('projects');
+
+const projectsDivObserver = new IntersectionObserver (
+    entries => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle("show", entry.isIntersecting);
+        });
+    },
+    {
+        threshold: 0.6
+    }
+);
+
+projectsDivObserver.observe(projectsDiv);

@@ -251,18 +251,19 @@ body {
 #about > div > div:nth-child(1) p {
     color: white;
     font-size: 1.4rem;
-    width: 24rem;
+    width: 22rem;
     margin-right: 5rem;
+    text-align: justify;
     animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
 }
 
 #about > div > div:nth-child(2) {
-    /* border: 1px solid white; */
     perspective: 1000px;
+    opacity: 0;
+    animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
 }
 
 #word-wall {
-    /* border: 1px solid red; */
     width: 90%;
     --word-wall-height: 22rem;
     height: 22rem;
@@ -288,7 +289,7 @@ body {
 #word-wall p {
     position: absolute;
     color: white;
-    opacity: 0.2;
+    opacity: 0.5;
     margin-top: 0;
     margin-bottom: 0;
     pointer-events: none;
@@ -303,8 +304,58 @@ body {
     justify-content: flex-end;
     background: 
     linear-gradient(to bottom, var(--theme-two), transparent 20%), 
-    linear-gradient(5deg, black 5%, var(--theme-two));
+    linear-gradient(5deg, black, var(--theme-two) 70% 100%);
     min-height: 146vh;
+}
+
+#projects-section-title {
+    width: 100%;
+    margin-top: 4rem;
+    padding-bottom: 4rem;
+    overflow: hidden;
+}
+
+.section-header {
+    position: relative;
+    z-index: 0;
+    width: fit-content;
+    color: var(--theme-two);
+    margin: 0 auto;
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 0.5rem 5rem;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: 0.8s;
+}
+
+.section-header.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.section-header::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    transform: skewX(-20deg);
+}
+
+.section-header::after {
+    content: '';
+    z-index: -2;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 100%;
+    height: 100%;
+    background-color: var(--theme-one);
+    transform: skewX(-20deg);
 }
 
 #projects {
@@ -315,10 +366,15 @@ body {
     align-items: center;
     justify-content: flex-end;
     overflow-x: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+#projects.show {
+    opacity: 1;
 }
 
 #projects-display {
-    /* background: linear-gradient(to right, rgba(128, 0, 128, 0.144) 0% 50%, rgba(0, 0, 255, 0.144) 50% 100%); */
     width: 100%;
     /* Got no idea why that is, but gotta set that left margin to negative 1px so that the frames are centered properly */
     margin-left: -1px;
@@ -339,8 +395,6 @@ body {
     --margin: 1rem;
     width: var(--width);
     height: 20rem;
-    /* border: 1px solid rgba(255, 0, 0, 0.137); */
-    /* box-sizing: border-box; */
     flex-shrink: 0;
     margin: 0 var(--margin);
     font-size: 2rem;
@@ -360,16 +414,6 @@ body {
     transform-style: preserve-3d;
     transition: transform 0.3s 0.3s, box-shadow 0.3s;
     border-radius: 1rem;
-    /* TEMPORARY!!!!!!!!!!!!! */
-    /* transform: rotateY(180deg); */
-}
-
-@keyframes frame-card-shadow {
-    50% {
-        box-shadow: 
-        0 4rem 4rem -2rem var(--theme-one), 
-        0 -4rem 4rem -2rem var(--theme-one);
-    }
 }
 
 .displaying:hover .frame-card {
@@ -377,7 +421,6 @@ body {
     box-shadow: 
     0 4rem 4rem -4rem var(--theme-one), 
     0 -4rem 4rem -4rem var(--theme-one);
-    animation: frame-card-shadow 10s linear 2s infinite;
     transition: transform 0.5s, box-shadow 0.5s 0.3s;
 }
 
@@ -583,6 +626,87 @@ body {
 /* CONTACT SECTION */
 
 #contact {
-    background: black;
+    background: linear-gradient(to bottom, black 20%, var(--theme-two));
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#contact-section-title {
+    width: 100%;
+    margin-top: 20rem;
+}
+
+#contact-menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3rem;
+    box-sizing: border-box;
+}
+
+#contact-menu a {
+    position: relative;
+    z-index: 1;
+    margin: 0 1.5rem;
+    width: 10rem;
+    height: 11.1rem;
+    text-decoration: none;
+    color: white;
+    --contact-transition-time: 0.3s;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: 0.5s;
+}
+
+#contact-menu a.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#contact-menu a::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 65%;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background-color: rgba(0, 132, 255, 0);
+    transition: background-color var(--contact-transition-time);
+    filter: blur(3rem);
+}
+
+#contact-menu a:hover::before {
+    background-color: rgba(0, 132, 255, 1);
+    transition: background-color var(--contact-transition-time);
+}
+
+#contact-menu a:hover i {
+    margin-top: 0;
+    transition: margin var(--contact-transition-time);
+}
+
+#contact-menu a:hover p {
+    opacity: 1;
+    transition: opacity calc(var(--contact-transition-time) + 0.2s);
+}
+
+#contact-menu a i {
+    font-size: 6rem;
+    width: 100%;
+    text-align: center;
+    margin-top: 4rem;
+    transition: margin var(--contact-transition-time);
+}
+
+#contact-menu a p {
+    font-size: 2rem;
+    margin: 1rem 0;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity calc(var(--contact-transition-time) - 0.2s);
 }
