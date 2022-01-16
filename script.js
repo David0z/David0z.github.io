@@ -17,18 +17,30 @@ document.addEventListener('scroll', (e) => {
 // ABOUT SECTION WORD WALL
 
 const wordWall = document.getElementById('word-wall');
-
 const worldWallHeight = parseFloat(getComputedStyle(wordWall).getPropertyValue('--word-wall-height').slice(0, this.length - 3));
-const numberOfRows = 10;
+// default 10
+const numberOfRows = 10; 
 const wordFontSize = worldWallHeight / numberOfRows;
+// default 5
 const minAnimationTime = 5;
+// default 10
 const maxAnimationTime = 10;
+// default 0.1
 const minOpacity = 0.1;
+// default 0.5
 const maxOpacity = 0.5;
-
+// default 50
 const numberOfWords = 50;
 
 const wordsArr = ['<body>', '</body>', '<nav>', '</nav>', '<section>', '</section>', '<div>', '</div>', '<h1>Hello World</h1>', '<p>Welcome to my page</p>', '<ul>', '</ul>', '<br>', '<li>', '</li>', '<a>', '</a>', '<hr>', '<footer>', '</footer>', '<button>Contact me</button>', '<head>', '</head>', '<script>', '</script>', '<img>'];
+
+let wordWallRows = [];
+let animationTime = [];
+
+for (let r = 0; r < numberOfRows; r++) {
+    wordWallRows.push([]);
+    animationTime.push([]);
+}
 
 function createWordElement() {
     let newWordElement = document.createElement('p');
@@ -39,12 +51,30 @@ function createWordElement() {
     newWordElement.style.top = `${newWordElementRow * wordFontSize}rem`;
     newWordElement.style.left = '-100%';
     newWordElement.style.opacity = minOpacity + Math.random() * (maxOpacity - minOpacity);
-    newWordElement.style.animation = `word-wall ${minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000)}ms  ${Math.random() * maxAnimationTime * 1000}ms linear infinite`;
-    wordWall.append(newWordElement);
+    let newAnimationTime = minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000);
+    animationTime[newWordElementRow].push(newAnimationTime);
+    wordWallRows[newWordElementRow].push(newWordElement);
 }
 
 for (let z=0; z < numberOfWords; z++) {
     createWordElement();
+}
+
+let sortedWordWallRows = [];
+let sortedAnimationTime = [];
+
+for (let z=0; z < wordWallRows.length; z++) {
+    let newRow = wordWallRows[z].sort((a, b) => {return a.style.opacity - b.style.opacity});
+    sortedWordWallRows.push(newRow);
+    let newAnimationRow = animationTime[z].sort((a, b) => {return b - a});
+    sortedAnimationTime.push(newAnimationRow);
+}
+
+for (let z=0; z < sortedWordWallRows.length; z++) {
+    for (let y=0; y < sortedWordWallRows[z].length; y++) {
+        sortedWordWallRows[z][y].style.animation = `word-wall ${sortedAnimationTime[z][y]}ms  ${Math.random() * maxAnimationTime * 1000}ms linear infinite`;
+        wordWall.append(sortedWordWallRows[z][y]);
+    }
 }
 
 // PROJECTS
