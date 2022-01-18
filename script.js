@@ -7,7 +7,7 @@ let lastScrollValue = 0;
 document.addEventListener('scroll', (e) => {
     var currentScrollValue = window.scrollY;
     if(lastScrollValue < currentScrollValue) {
-        navbar.style.marginTop = '-4rem';
+        navbar.style.marginTop = '-14rem';
     } else {
         navbar.style.marginTop = 0;
     }
@@ -85,25 +85,25 @@ const projectsList = [];
 const projectsArray = [
     {
         projectName: 'Choropleth Map',
-        projectUrl: 'https://codepen.io/dawid0zz/full/oNeJqEZ',
+        projectUrl: 'https://david0z.github.io/choropleth-map/',
         projectImage: '/resources/usmap.png',
         projectTools: ['HTML, CSS, Javascript', 'React.js', 'D3.js']
     },
     {
         projectName: 'Calculator',
-        projectUrl: 'https://codepen.io/dawid0zz/full/bGRJzyO',
+        projectUrl: 'https://david0z.github.io/calculator/',
         projectImage: '/resources/calculator.png',
         projectTools: ['HTML, CSS, Javascript', 'Math.js']
     },
     {
         projectName: 'Drum Machine',
-        projectUrl: 'https://codepen.io/dawid0zz/full/gORXKoV',
+        projectUrl: 'https://david0z.github.io/sound-machine/',
         projectImage: '/resources/drum.png',
         projectTools: ['HTML, CSS, Javascript']
     },
     {
         projectName: 'Product Landing Page',
-        projectUrl: 'https://codepen.io/dawid0zz/full/ZEKbPza',
+        projectUrl: 'https://david0z.github.io/product-landing-page/',
         projectImage: '/resources/cola.png',
         projectTools: ['HTML, CSS']
     }
