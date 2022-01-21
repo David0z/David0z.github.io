@@ -57,6 +57,15 @@
         margin-left: -5vw;
     }
 
+    
+    #bio-wrap h1 {
+        font-size: 4.41em;
+    }
+
+    #bio-wrap h2 {
+        font-size: 2.61em;
+    }
+
     /* PROJECTS SECTION */
 
     .projects {
