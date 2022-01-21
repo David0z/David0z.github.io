@@ -319,15 +319,26 @@ body {
     animation: squares var(--anim1-length) var(--anim1-delay) forwards, square2 var(--anim2-length) var(--anim2-delay) forwards;
 }
 
+@keyframes border {
+    0% {
+        border: 1px solid transparent;
+    }
+
+    100% {
+        border: 1px solid white;
+    }
+}
+
 #bio-wrap {
     background: rgba(255, 255, 255, 0.041);
     backdrop-filter: blur(1rem);
     border-radius: 0 1em;
     padding: 1em;
-    animation: container-mask-image var(--anim1-delay) forwards;
+    animation: container-mask-image var(--anim1-delay) forwards, border 1s calc(var(--anim2-delay) + var(--anim2-length)) forwards;
     --container-mask-image: linear-gradient(to bottom, transparent 0% var(--x), black var(--x) var(--y), transparent var(--y) 100%);
     mask-image: var(--container-mask-image);
     -webkit-mask-image: var(--container-mask-image);
+    box-sizing: border-box;
 }
 
 #bio-wrap h1, #bio-wrap h2, #bio-wrap p {
@@ -336,15 +347,16 @@ body {
 
 #bio-wrap h1 {
     color: white;
-    font-size: 4.1em;
+    font-size: 4.34em;
     margin: 0;
+    padding: 0;
     line-height: 1em;
     animation: opacity var(--anim3-length) var(--anim3-delay) forwards;
 }
 
 #bio-wrap h2 {
     color: var(--theme-one);
-    font-size: 2.44em;
+    font-size: 2.58em;
     margin: 0;
     animation: opacity var(--anim4-length) var(--anim4-delay) forwards;
 }
@@ -352,7 +364,8 @@ body {
 #bio-wrap p {
     color: white;
     font-size: 1.4em;
-    margin-right: 1.2em;
+    padding: 0;
+    margin: 0;
     text-align: justify;
     animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
 }
