@@ -47,12 +47,6 @@ body {
     background-color: var(--theme-two);
 }
 
-@keyframes opacity {
-    100% {
-        opacity: 1;
-    }
-}
-
 /* NAVIGATION BAR */
 
 #navbar {
@@ -154,108 +148,28 @@ body {
     padding: calc((2rem + 1.5rem) + 3.5rem) 0;
     display: flex;
     justify-content: center;
-    background: black;
-    position: relative;
-    overflow: hidden;
-}
-
-#about > div:nth-child(1) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    perspective: 1000px;
-    opacity: 0;
-    animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
-}
-
-#word-wall {
-    width: 100%;
-    height: 100%;
-    margin-left: -8vw;
-    transform-style: preserve-3d;
-    transform: rotateY(-25deg);
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-    --word-wall-mask-transparency: rgba(0, 0, 0, 0);
-    --word-wall-mask-gradient: linear-gradient(to right, var(--word-wall-mask-transparency), black, var(--word-wall-mask-transparency) 95%);
-    mask-image: var(--word-wall-mask-gradient);
-    -webkit-mask-image: var(--word-wall-mask-gradient);
-}
-
-@keyframes word-wall {
-    100% {
-        left: 100%;
-    }
-}
-
-#word-wall p {
-    position: absolute;
-    color: white;
-    margin-top: 0;
-    margin-bottom: 0;
-    pointer-events: none;
-    user-select: none;
-}
-
-#about > div:nth-child(2) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
     background: 
     linear-gradient(to top, var(--theme-two), transparent 20%), 
     linear-gradient(-5deg, var(--theme-two), transparent 30%), 
-    linear-gradient(-10deg, var(--theme-two), transparent);
+    linear-gradient(-10deg, var(--theme-two), black);
 }
 
-#about > div:nth-child(3) {
+#about > div {
     box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    z-index: 1;
 }
 
-#about > div:nth-child(3) > div {
+#about > div > div {
     box-sizing: border-box;
 }
 
-#about > div:nth-child(3) > div:nth-child(1) {
+#about > div > div:nth-child(1) {
     --left-width: 30rem;
-    --padding: 2em;
     width: var(--left-width);
-    height: fit-content;
-    padding: var(--padding);
+    padding: 3em 0 0 3em;
     position: relative;
     font-size: 1rem;
-}
-
-@property --x {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 0%;
-  }
-
-@property --y {
-    syntax: '<percentage>';
-    inherits: false;
-    initial-value: 0%;
-}
-
-
-@keyframes container-mask-image {
-    0% {
-        --x: 50%;
-        --y: 50%;
-    }
-
-    100% {
-        --x: 0%;
-        --y: 100%;
-    }
 }
 
 @keyframes squares {
@@ -276,65 +190,51 @@ body {
     }
 }
 
-.square {
+#square1, #square2 {
+    --size: 2em;
     --length: 10em;
-    --square-border-radius: calc(var(--padding) / 2);
-    width: var(--padding);
-    height: var(--padding);
+    width: var(--size);
+    height: var(--size);
     background-color: white;
     position: absolute;
-    opacity: 0;
     top: 0;
     left: 0;
-}
-
-#squares {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-    top: 100%;
-    left: 100%;
-    transform: rotate(180deg);
+    opacity: 0;
 }
 
 @keyframes square1 {
     100% {
         width: var(--length);
-        border-radius: var(--square-border-radius) var(--square-border-radius) 0 0;
     }
 }
 
-.square1, .square3 {
+#square1 {
     animation: squares var(--anim1-length) var(--anim1-delay) forwards, square1 var(--anim2-length) var(--anim2-delay) forwards;
 }
 
 @keyframes square2 {
     100% {
         height: var(--length);
-        border-radius: var(--square-border-radius) 0 0 var(--square-border-radius);
     }
 }
 
-.square2, .square4 {
+#square2 {
     animation: squares var(--anim1-length) var(--anim1-delay) forwards, square2 var(--anim2-length) var(--anim2-delay) forwards;
 }
 
-#bio-wrap {
-    background: rgba(255, 255, 255, 0.041);
-    backdrop-filter: blur(1rem);
-    border-radius: 0 1em;
-    padding: 1em;
-    animation: container-mask-image var(--anim1-delay) forwards;
-    --container-mask-image: linear-gradient(to bottom, transparent 0% var(--x), black var(--x) var(--y), transparent var(--y) 100%);
-    mask-image: var(--container-mask-image);
-    -webkit-mask-image: var(--container-mask-image);
+@keyframes opacity {
+    100% {
+        opacity: 1;
+    }
 }
 
-#bio-wrap h1, #bio-wrap h2, #bio-wrap p {
+#about > div > div:nth-child(1) h1, 
+#about > div > div:nth-child(1) h2, 
+#about > div > div:nth-child(1) p {
     opacity: 0;
 }
 
-#bio-wrap h1 {
+#about > div > div:nth-child(1) h1 {
     color: white;
     font-size: 4.1em;
     margin: 0;
@@ -342,27 +242,59 @@ body {
     animation: opacity var(--anim3-length) var(--anim3-delay) forwards;
 }
 
-#bio-wrap h2 {
+#about > div > div:nth-child(1) h2 {
     color: var(--theme-one);
     font-size: 2.44em;
     margin: 0;
     animation: opacity var(--anim4-length) var(--anim4-delay) forwards;
 }
 
-#bio-wrap p {
+#about > div > div:nth-child(1) p {
     color: white;
     font-size: 1.4em;
-    margin-right: 1.2em;
+    margin-right: 3.5em;
     text-align: justify;
     animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
 }
 
-#about > div:nth-child(3) > div:nth-child(2) {
+#about > div > div:nth-child(2) {
+    --word-wall-height: 22rem;
     width: 40rem;
     perspective: 1000px;
     opacity: 0;
-    color: white;
     animation: opacity var(--anim5-length) var(--anim5-delay) forwards;
+}
+
+#word-wall {
+    width: var(--word-wall-height) / 9 * 16;
+    height: 22rem;
+    margin: 2rem auto 0 auto;
+    transform-style: preserve-3d;
+    transform: rotateY(-25deg);
+    overflow: hidden;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    --word-wall-mask-transparency: rgba(0, 0, 0, 0);
+    --word-wall-mask-gradient: linear-gradient(to right, var(--word-wall-mask-transparency), black 15% 85%, var(--word-wall-mask-transparency));
+    mask-image: var(--word-wall-mask-gradient);
+    -webkit-mask-image: var(--word-wall-mask-gradient);
+}
+
+@keyframes word-wall {
+    100% {
+        left: 100%;
+    }
+}
+
+#word-wall p {
+    position: absolute;
+    color: white;
+    opacity: 0.5;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none;
+    user-select: none;
 }
 
 /* PROJECTS SECTION */

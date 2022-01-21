@@ -42,19 +42,20 @@
         padding: 16rem 0;
     }
 
-    #about > div:nth-child(3) {
+    #about > div {
         flex-direction: column;
         align-items: center;
     }
 
-    #about > div:nth-child(3) > div:nth-child(1) {
+    #about > div > div:nth-child(1) {
         width: 80%;
         font-size: 1.5rem;
         margin-bottom: 15rem;
+        margin-left: 3rem;
     }
 
     #word-wall {
-        margin-left: -5vw;
+        margin: 0 auto;
     }
 
     /* PROJECTS SECTION */

@@ -17,7 +17,7 @@ document.addEventListener('scroll', (e) => {
 // ABOUT SECTION WORD WALL
 
 const wordWall = document.getElementById('word-wall');
-const worldWallHeight = 100;
+const worldWallHeight = parseFloat(getComputedStyle(wordWall).getPropertyValue('--word-wall-height').slice(0, this.length - 3));
 // default 10
 const numberOfRows = 10; 
 const wordFontSize = worldWallHeight / numberOfRows;
@@ -46,10 +46,9 @@ function createWordElement() {
     let newWordElement = document.createElement('p');
     newWordElement.innerText = wordsArr[Math.floor(Math.random() * wordsArr.length)];
     let newWordElementRow = Math.floor(Math.random() * numberOfRows);
-    let fontAndLineHeight = `${wordFontSize / 2}vw`;
-    newWordElement.style.fontSize = fontAndLineHeight;
-    newWordElement.style.lineHeight = fontAndLineHeight;
-    newWordElement.style.top = `${newWordElementRow * wordFontSize}%`;
+    newWordElement.style.fontSize = `${wordFontSize}rem`;
+    newWordElement.style.lineHeight = `${wordFontSize}rem`;
+    newWordElement.style.top = `${newWordElementRow * wordFontSize}rem`;
     newWordElement.style.left = '-100%';
     newWordElement.style.opacity = minOpacity + Math.random() * (maxOpacity - minOpacity);
     let newAnimationTime = minAnimationTime * 1000 + (Math.random() * (maxAnimationTime - minAnimationTime) * 1000);
