@@ -85,6 +85,12 @@ const projectsList = [];
 
 const projectsArray = [
     {
+        projectName: 'Audio Playlist',
+        projectUrl: 'https://david0z.github.io/sound-playlist/',
+        projectImage: '/resources/playlist_app.png',
+        projectTools: ['React.js, SCSS', 'react-beautiful-dnd, react-icons, uuid']
+    },
+    {
         projectName: 'Choropleth Map',
         projectUrl: 'https://david0z.github.io/choropleth-map/',
         projectImage: '/resources/usmap.png',
