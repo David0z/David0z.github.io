@@ -85,10 +85,16 @@ const projectsList = [];
 
 const projectsArray = [
     {
+        projectName: 'Image Gallery',
+        projectUrl: 'https://david0z.github.io/image-gallery/',
+        projectImage: '/resources/image_gallery.png',
+        projectTools: ['React.js', 'styled-components', 'react-icons', 'uuid', 'react-masonry-css', 'react-intersection-observer', 'framer-motion']
+    },
+    {
         projectName: 'Audio Playlist',
         projectUrl: 'https://david0z.github.io/sound-playlist/',
         projectImage: '/resources/playlist_app.png',
-        projectTools: ['React.js, SCSS', 'react-beautiful-dnd, react-icons, uuid']
+        projectTools: ['React.js, SCSS', 'react-beautiful-dnd', 'react-icons', 'uuid']
     },
     {
         projectName: 'Choropleth Map',

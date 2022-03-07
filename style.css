@@ -526,6 +526,20 @@ body {
     height: 100%;
 }
 
+.frame-back-left {
+    margin-right: 0.5rem;
+    overflow-y: auto;
+}
+
+.frame-back-left::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+.frame-back-left::-webkit-scrollbar-thumb {
+    background-color: var(--theme-one);
+    border-radius: 0.25rem;
+}
+
 .frame-back-left h5 {
     margin: 0;
     line-height: 2rem;
